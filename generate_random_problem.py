@@ -1,5 +1,9 @@
 import random
 
+with open('generated_problems.txt') as gen_f:
+    content = gen_f.readlines()
+generated_problems = [x.strip() for x in content] 
+
 problems = """
 Two Sum
 Best Time to Buy and Sell Stock
@@ -79,6 +83,10 @@ Top K Frequent Elements
 Find Median from Data Stream
 """.split('\n')
 
-problem = random.choice(problems)
+problem = random.choice(list(set(problems) - set(generated_problems)))
+with open('generated_problems.txt', 'w+') as gen_f:
+    for prob in generated_problems+[problem]:
+        gen_f.write(prob+"\n")
+
 print(problem)
 
