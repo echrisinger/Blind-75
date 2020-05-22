@@ -1,3 +1,18 @@
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        table = [False]*(len(s)+1)
+        table[0] = True
+        for end in range(1,len(s)+1):
+            for w in wordDict:
+                w_l = len(w)
+                start = end-w_l
+                if start >= 0 and (start-1 == -1 or table[start]) and s[start:end] == w:
+                    table[end] = True
+                    break
+                
+        return table[-1]
+
+#### Trie Soln ####
 class TrieNode:
     count = 0
     
